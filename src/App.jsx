@@ -1,34 +1,18 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
-import ProtectedRoute from "./components/ProtectedRoute";
-import TablePage from "./pages/TablePage";
-import EditorPage from "./pages/EditorPage";
-import SheetPage from "./pages/SheetPage";
+import Users from "./pages/Users";
+import Spreadsheet from "./pages/Spreadsheet";
+import Editor from "./pages/Editor";
 
 export default function App() {
   return (
-    <Routes>
-      <Route element={<AppLayout />}>
-        <Route path="/" element={<Navigate to="/table" />} />
-        <Route path="/table" element={<TablePage />} />
-        <Route
-          path="/editor"
-          element={
-            <ProtectedRoute>
-              <EditorPage />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/sheet"
-          element={
-            <ProtectedRoute>
-              <SheetPage />
-            </ProtectedRoute>
-          }
-        />
-      </Route>
-    </Routes>
+    <AppLayout>
+      <Routes>
+        <Route path="/" element={<Navigate to="/users" />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/spreadsheet" element={<Spreadsheet />} />
+        <Route path="/editor" element={<Editor />} />
+      </Routes>
+    </AppLayout>
   );
 }

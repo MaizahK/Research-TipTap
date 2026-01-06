@@ -1,13 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { ConfigProvider, theme } from "antd";
 
-export const ThemeContext = createContext();
+const ThemeContext = createContext();
 
-export default function ThemeProvider({ children }) {
+export const ThemeProvider = ({ children }) => {
   const [dark, setDark] = useState(false);
 
+  const toggleTheme = () => setDark((prev) => !prev);
+
   return (
-    <ThemeContext.Provider value={{ dark, setDark }}>
+    <ThemeContext.Provider value={{ dark, toggleTheme }}>
       <ConfigProvider
         theme={{
           algorithm: dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
@@ -17,4 +19,6 @@ export default function ThemeProvider({ children }) {
       </ConfigProvider>
     </ThemeContext.Provider>
   );
-}
+};
+
+export const useTheme = () => useContext(ThemeContext);

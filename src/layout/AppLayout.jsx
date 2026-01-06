@@ -1,24 +1,17 @@
 import { Layout } from "antd";
-import { Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 
-const { Sider, Header, Content } = Layout;
+const { Content } = Layout;
 
-export default function AppLayout() {
+export default function AppLayout({ children }) {
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider width={220}>
-        <Sidebar />
-      </Sider>
-
+      <Sidebar />
       <Layout>
-        <Header style={{ background: "#fff", padding: "0 16px" }}>
-          <Navbar />
-        </Header>
-
-        <Content style={{ margin: 16 }}>
-          <Outlet />
+        <Navbar />
+        <Content style={{ margin: "16px", padding: 16 }}>
+          {children}
         </Content>
       </Layout>
     </Layout>
